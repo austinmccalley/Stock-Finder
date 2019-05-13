@@ -1,0 +1,33 @@
+{
+  "name": "stockfinder",
+  "version": "1.0.1",
+  "description": "Query IEX Cloud using an API key to get stock prices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-Que/Stock-Finder.git"
+  },
+  "keywords": [
+    "Stock",
+    "Finder",
+    "Stock",
+    "Stocks",
+    "IEX",
+    "Cloud",
+    "IEX",
+    "Cloud"
+  ],
+  "author": "Austin McCalley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mr-Que/Stock-Finder/issues"
+  },
+  "homepage": "https://github.com/Mr-Que/Stock-Finder#readme",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  }
+}
