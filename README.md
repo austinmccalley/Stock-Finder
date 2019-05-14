@@ -1,4 +1,5 @@
 # Stock Finder
+[![Known Vulnerabilities](https://snyk.io/test/github/Mr-Que/Stock-Finder/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Mr-Que/Stock-Finder?targetFile=package.json)
 
 Query IEX Cloud using an API key to get stock prices
 
