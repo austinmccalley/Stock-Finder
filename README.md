@@ -1,5 +1,5 @@
 # Stock Finder
-[![Known Vulnerabilities](https://snyk.io/test/github/austinmccalley/Stock-Finder/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Mr-Que/Stock-Finder?targetFile=package.json)
+[![Known Vulnerabilities](https://snyk.io/test/github/austinmccalley/Stock-Finder/badge.svg?targetFile=package.json)](https://snyk.io/test/github/austinmccalley/Stock-Finder?targetFile=package.json)
 ![NPM Version](https://img.shields.io/npm/v/stockfinder.svg)
 ![GitHub Issues](https://img.shields.io/github/issues/austinmccalley/Stock-Finder.svg)
 
@@ -23,6 +23,19 @@ var stockFinder = require('stockfinder');
         }).catch((err) => {
             console.log(err);
         });
+```
+
+### Note
+Sometimes IEX Cloud has issues with normal requests, you can switch to using a CURL request instead by following the example.
+
+```javascript
+const stockFinder = require('stockfinder');
+
+    stockFinder(ticker, apiKey, curl=true).then((res) => {
+        console.log(res);
+    }).catch((err) => {
+        console.log(err)
+    });
 ```
 
 ## Contributing
