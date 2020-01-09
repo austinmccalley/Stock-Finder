@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npx eslint index.js --fix & npx mocha",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "preversion": "npm test",
+    "version": "git add -A dist",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
