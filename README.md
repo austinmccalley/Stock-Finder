@@ -167,5 +167,5 @@ Project Link: [https://github.com/austinmccalley/Stock-Finder](https://github.co
 [license-shield]: https://img.shields.io/github/license/austinmccalley/Stock-Finder.svg?style=flat-square
 [license-url]: https://github.com/austinmccalley/Stock-Finder/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/austinmccalley
+[linkedin-url]: https://linkedin.com/in/austin-mccalley
 [product-screenshot]: images/screenshot.png
