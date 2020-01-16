@@ -52,7 +52,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-I created this project to easily query the IEX Cloud database of stock information for my own use. I orginally started by looking for packages that already offered this and there was none that was updated. I then created this package to allow for a much more streamlined approach to do this.
+I created this project to easily query the IEX Cloud database of stock information for my own use. I originally started by looking for packages that already offered this and there was none that was updated. I then created this package to allow for a much more streamlined approach to do this.
 
 
 ### Built With
