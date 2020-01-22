@@ -12,7 +12,15 @@ const stockFinder = require('../index.js');
 
 
 it('Should return TSLA stock', () => {
-  const res = stockFinder('TSLA', process.env.API_KEY);
+  const sf = new stockFinder('stable', 'TSLA', process.env.API_KEY, false);
+  const res = sf.getStock();
   return expect(res).to.eventually.have.length(1);
+  done();
+});
+
+it('Should return multiple stocks', () => {
+  const sf = new stockFinder('stable', ['TSLA', 'AAPL'], process.env.API_KEY, false);
+  const res = sf.getStock();
+  return expect(res).to.eventually.have.length(2);
   done();
 });
