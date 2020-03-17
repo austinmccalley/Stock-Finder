@@ -2,7 +2,8 @@
   "name": "stockfinder",
   "version": "2.5.0",
   "description": "Query IEX Cloud using an API key to get stock prices",
-  "main": "index.js",
+  "main": "built/src/index.js",
+  "types": "built/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prod": "tsc && node ./built/src/app.js",
@@ -13,7 +14,8 @@
     "prepare": "npm run snyk-protect",
     "preversion": "npm test",
     "version": "git add .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
