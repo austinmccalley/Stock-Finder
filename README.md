@@ -59,6 +59,7 @@ I created this project to easily query the IEX Cloud database of stock informati
 
 * [NPM](https://nodejs.org)
 * [request-promise-native](https://github.com/request/request-promise-native)
+* [TypeScript](https://www.typescriptlang.org/)
 
 
 
@@ -85,7 +86,10 @@ git clone https://github.com/austinmccalley/Stock-Finder.git
 ```sh
 npm install
 ```
-
+3. Build JS File
+```sh
+tsc
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
