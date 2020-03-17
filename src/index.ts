@@ -1,22 +1,49 @@
-const rp = require('request-promise-native');
+import * as rp from 'request-promise-native';
+
+// eslint-disable-next-line func-names
+const ats = function (arr: string[]): string {
+  let str = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    if (i !== 0) {
+      str += `,${arr[i]}`;
+    } else {
+      str += arr[i];
+    }
+  }
+  return str;
+};
+
+interface ErrInterface {
+  statusCode: number; name: string; message: string; error: object;
+}
 
 const sf = class StockFinder {
-  constructor(version, tickers, apiKey, curl) {
+  version: string;
+
+  tickers: string[];
+
+  apiKey: string;
+
+  curl: boolean;
+
+  error: object;
+
+  constructor(version: string, tickers: string[], apiKey: string, curl: boolean) {
     this.version = version;
     this.tickers = tickers;
     this.apiKey = apiKey;
     this.curl = curl;
-    this.error = false;
+    this.error = {};
   }
 
-  getStock() {
+  public getStock(): Promise<StockFinder> {
     return new Promise((resolve, reject) => {
       const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${this.tickers}`;
-      if (this.apikey === undefined) {
-        rp(url, {
+      if (this.apiKey !== undefined) {
+        rp.get(url, {
           resolveWithFullResponse: true,
           simple: true,
-        }).then((res) => {
+        }).then((res: { body: string }) => {
           if (!res) {
             reject(new Error(
               'Something went wrong here.',
@@ -24,28 +51,26 @@ const sf = class StockFinder {
           } else {
             resolve(JSON.parse(res.body));
           }
-        }).catch((err) => {
+        }).catch((err: ErrInterface) => {
           this.assignError(err);
           reject(this.error);
         });
       } else {
-        reject(Error({
-          error: 'Please provide an API key for IEX Cloud',
-        }));
+        reject(Error('Please provide an API key for IEX Cloud'));
       }
     });
   }
 
-  getStocks() {
+  public getStocks(): Promise<StockFinder> {
     return new Promise((resolve, reject) => {
       if (typeof this.tickers === 'object') {
-        const stocks = Array.prototype.toString(this.tickers);
+        const stocks = ats(this.tickers);
         const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${stocks}`;
-        if (this.apiKey === undefined) {
-          rp(url, {
+        if (this.apiKey !== undefined) {
+          rp.get(url, {
             resolveWithFullResponse: true,
             simple: true,
-          }).then((res) => {
+          }).then((res: { body: string }) => {
             if (!res) {
               reject(new Error(
                 'Something went wrong here.',
@@ -53,20 +78,19 @@ const sf = class StockFinder {
             } else {
               resolve(JSON.parse(res.body));
             }
-          }).catch((err) => {
+          }).catch((err: ErrInterface) => {
             this.assignError(err);
             reject(this.error);
           });
         }
       } else {
-        reject(Error({
-          error: 'Please provide an API key for IEX Cloud',
-        }));
+        reject(Error('Please provide an API key for IEX Cloud'));
       }
     });
   }
 
-  assignError(err) {
+
+  assignError(err: ErrInterface): void {
     const statusCodes = [400, 401, 402, 403, 404, 413, 429, 451, 500];
 
     if (statusCodes.includes(err.statusCode)) {
