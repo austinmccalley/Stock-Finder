@@ -223,5 +223,5 @@ https://img.shields.io/github/license/austinmccalley/Stock-Finder.svg?style=flat
 https://github.com/austinmccalley/Stock-Finder/blob/master/LICENSE
 [linkedin-shield]:
 https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/austin-mccalley [product-screenshot]:
-images/screenshot.png
+[linkedin-url]: https://linkedin.com/in/austin-mccalley 
+[product-screenshot]:images/screenshot.png
