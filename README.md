@@ -4,6 +4,7 @@
 [![Issues][issues-shield]][issues-url] [![MIT
 License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder?ref=badge_shield)
 
 
 
@@ -190,6 +191,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder?ref=badge_large)
+
 ## Contact
 
 Austin McCalley - austin@austinmccalley.com
