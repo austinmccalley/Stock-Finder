@@ -1,6 +1,6 @@
 {
   "name": "stockfinder",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Query IEX Cloud using an API key to get stock prices",
   "main": "built/src/index.js",
   "types": "built/src/index.d.ts",
