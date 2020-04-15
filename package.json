@@ -6,10 +6,10 @@
   "types": "built/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "prod": "tsc && node ./built/src/app.js",
+    "prod": "tsc && node ./built/src/index.js",
     "lint": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx",
-    "debug": "tsc && node --inspect ./built/src/app.js",
-    "test": "npx mocha",
+    "debug": "tsc && node --inspect ./built/src/index.js",
+    "test": "snyk test && npx mocha",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "preversion": "npm test",
@@ -38,13 +38,11 @@
   },
   "homepage": "https://github.com/Mr-Que/Stock-Finder#readme",
   "dependencies": {
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "snyk": "^1.290.1"
+    "node-fetch": "^2.6.0"
   },
   "snyk": true,
   "devDependencies": {
-    "@types/request-promise-native": "^1.0.17",
+    "@types/node-fetch": "^2.5.6",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "chai": "^4.2.0",
@@ -62,6 +60,7 @@
     "husky": "^4.0.3",
     "mocha": "^7.0.0",
     "prettier": "^1.19.1",
+    "snyk": "^1.305.1",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"

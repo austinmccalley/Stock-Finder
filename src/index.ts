@@ -1,4 +1,5 @@
-import * as rp from 'request-promise-native';
+// import * as rp from 'request-promise-native';
+import fetch from 'node-fetch';
 
 // eslint-disable-next-line func-names
 const ats = function (arr: string[]): string {
@@ -12,10 +13,6 @@ const ats = function (arr: string[]): string {
   }
   return str;
 };
-
-interface ErrInterface {
-  statusCode: number; name: string; message: string; error: object;
-}
 
 const sf = class StockFinder {
   version: string;
@@ -40,26 +37,15 @@ const sf = class StockFinder {
     return new Promise((resolve, reject) => {
       const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${this.tickers}`;
       if (this.apiKey !== undefined) {
-        rp.get(url, {
-          resolveWithFullResponse: true,
-          simple: true,
-        }).then((res: { body: string }) => {
-          if (!res) {
-            reject(new Error(
-              'Something went wrong here.',
-            ));
-          } else {
-            resolve(JSON.parse(res.body));
-          }
-        }).catch((err: ErrInterface) => {
-          this.assignError(err);
-          reject(this.error);
-        });
+        fetch(url).then((res) => res.json()).then((body) => {
+          resolve(body);
+        }).catch((err) => reject(err));
       } else {
-        reject(Error('Please provide an API key for IEX Cloud'));
+        reject(new Error('API key was not defined'));
       }
     });
   }
+
 
   public getStocks(): Promise<StockFinder> {
     return new Promise((resolve, reject) => {
@@ -67,42 +53,14 @@ const sf = class StockFinder {
         const stocks = ats(this.tickers);
         const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${stocks}`;
         if (this.apiKey !== undefined) {
-          rp.get(url, {
-            resolveWithFullResponse: true,
-            simple: true,
-          }).then((res: { body: string }) => {
-            if (!res) {
-              reject(new Error(
-                'Something went wrong here.',
-              ));
-            } else {
-              resolve(JSON.parse(res.body));
-            }
-          }).catch((err: ErrInterface) => {
-            this.assignError(err);
-            reject(this.error);
-          });
+          fetch(url).then((res) => res.json()).then((body) => {
+            resolve(body);
+          }).catch((err) => reject(err));
+        } else {
+          reject(new Error('API key was not defined'));
         }
-      } else {
-        reject(Error('Please provide an API key for IEX Cloud'));
       }
     });
-  }
-
-
-  assignError(err: ErrInterface): void {
-    const statusCodes = [400, 401, 402, 403, 404, 413, 429, 451, 500];
-
-    if (statusCodes.includes(err.statusCode)) {
-      this.error = {
-        name: err.name,
-        statusCode: err.statusCode,
-        message: err.message,
-        error: err.error,
-      };
-    } else {
-      throw err;
-    }
   }
 };
 
