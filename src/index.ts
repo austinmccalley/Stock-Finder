@@ -62,6 +62,19 @@ const sf = class StockFinder {
       }
     });
   }
+
+  public getCompany(): Promise<StockFinder> {
+    return new Promise((resolve, reject) => {
+      const url = `https://cloud.iexapis.com/${this.version}/stock/${this.tickers}/company?token=${this.apiKey}`;
+      if (this.apiKey !== undefined) {
+        fetch(url).then((res) => res.json()).then((body) => {
+          resolve(body);
+        }).catch((err) => reject(err));
+      } else {
+        reject(new Error('API key was not defined'));
+      }
+    });
+  }
 };
 
 module.exports = sf;

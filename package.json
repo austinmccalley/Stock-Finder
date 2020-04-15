@@ -8,7 +8,7 @@
     "build": "tsc",
     "prod": "tsc && node ./built/src/index.js",
     "lint": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx",
-    "debug": "tsc && node --inspect ./built/src/index.js",
+    "debug": "tsc && npm run test",
     "test": "snyk test && npx mocha",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
