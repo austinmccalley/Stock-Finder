@@ -1,8 +1,8 @@
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url] [![MIT
-License][license-shield]][license-url]
+[![Issues][issues-shield]][issues-url] 
+[![MITLicense][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Faustinmccalley%2FStock-Finder?ref=badge_shield)
 
@@ -58,7 +58,7 @@ package to allow for a much more streamlined approach to do this.
 ### Built With
 
 * [NPM](https://nodejs.org)
-* [request-promise-native](https://github.com/request/request-promise-native)
+* [NodeFetch](https://github.com/node-fetch/node-fetch)
 * [TypeScript](https://www.typescriptlang.org/)
 
 <!-- GETTING STARTED -->
@@ -207,7 +207,6 @@ Project Link:
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]:
 https://img.shields.io/github/contributors/austinmccalley/Stock-Finder.svg?style=flat-square
 [contributors-url]:
