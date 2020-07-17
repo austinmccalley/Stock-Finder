@@ -108,7 +108,7 @@ const stockFinder = require('stockfinder');
   Declare the Stock Finder with
   the parameters you want
 */
-const sf = new stockfinder('stable', 'TSLA', apiKey, false);
+const sf = new stockFinder('stable', 'TSLA', apiKey, false);
 
 /*
   Call the get stock function and then wait
@@ -128,7 +128,7 @@ const stockFinder = require('stockfinder');
   Declare the Stock Finder with
   the parameters you want
 */
-const sf = new stockfinder('stable', ['TSLA','AAPL'], apiKey, false);
+const sf = new stockFinder('stable', ['TSLA','AAPL'], apiKey, false);
 
 /*
   Call the get stocks function and then wait
@@ -151,7 +151,7 @@ const stockFinder = require('stockfinder');
   Declare the Stock Finder with
   the parameters you want
 */
-const sf = new stockfinder('stable', 'TSLA', apiKey, true);
+const sf = new stockFinder('stable', 'TSLA', apiKey, true);
 
 /*
   Call the get stock function and then wait
