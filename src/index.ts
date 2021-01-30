@@ -1,67 +1,69 @@
-// import * as rp from 'request-promise-native';
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 
-// eslint-disable-next-line func-names
-const ats = function (arr: string[]): string {
-  let str = '';
+const ats = (arr: string[]): string => {
+  let str = ''
   for (let i = 0; i < arr.length; i += 1) {
     if (i !== 0) {
-      str += `,${arr[i]}`;
+      str += `,${arr[i]}`
     } else {
-      str += arr[i];
+      str += arr[i]
     }
   }
-  return str;
-};
+  return str
+}
 
-const sf = class StockFinder {
-  version: string;
+interface IStock {
+  symbol: string
+  sector: string
+  securityType: string
+  bidPrice: number
+  bidSize: number
+  askPrice: number
+  askSize: number
+  lastUpdated: number
+  lastSalePrice: number
+  lastSaleSize: number
+  lastSaleTime: number
+  volume: number
+}
 
-  tickers: string[];
-
-  apiKey: string;
-
-  curl: boolean;
-
-  error: object;
-
-  constructor(version: string, tickers: string[], apiKey: string, curl: boolean) {
-    this.version = version;
-    this.tickers = tickers;
-    this.apiKey = apiKey;
-    this.curl = curl;
-    this.error = {};
+const checkValidBody = async ({ body, array }: { body: IStock[]; array: boolean }) => {
+  if (body.length === 1 && array === false) {
+    return true
   }
-
-  public getStock(): Promise<StockFinder> {
-    return new Promise((resolve, reject) => {
-      const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${this.tickers}`;
-      if (this.apiKey !== undefined) {
-        fetch(url).then((res) => res.json()).then((body) => {
-          resolve(body);
-        }).catch((err) => reject(err));
-      } else {
-        reject(new Error('API key was not defined'));
-      }
-    });
+  if (body.length > 1 && array === true) {
+    return true
   }
+  return false
+}
 
+const getStock = async ({ ticker, apiKey }: { ticker: string; apiKey: string }): Promise<IStock> => {
+  const url = `https://cloud.iexapis.com/stable/tops?token=${apiKey}&symbols=${ticker}`
+  if (typeof apiKey !== 'string') throw new Error('API keyas not defined')
 
-  public getStocks(): Promise<StockFinder> {
-    return new Promise((resolve, reject) => {
-      if (typeof this.tickers === 'object') {
-        const stocks = ats(this.tickers);
-        const url = `https://cloud.iexapis.com/${this.version}/tops?token=${this.apiKey}&symbols=${stocks}`;
-        if (this.apiKey !== undefined) {
-          fetch(url).then((res) => res.json()).then((body) => {
-            resolve(body);
-          }).catch((err) => reject(err));
-        } else {
-          reject(new Error('API key was not defined'));
-        }
-      }
-    });
-  }
-};
+  const resp = await fetch(url)
+    .then(res => res.json())
+    .catch(err => {
+      throw new Error(err)
+    })
+  if (checkValidBody({ body: resp, array: false })) return resp[0] as IStock
 
-module.exports = sf;
+  throw new Error('Query did not return a valid body')
+}
+
+const getStocks = async ({ tickers, apiKey }: { tickers: string[]; apiKey: string }): Promise<IStock[]> => {
+  const stocks = ats(tickers)
+  const url = `https://cloud.iexapis.com/stable/tops?token=${apiKey}&symbols=${stocks}`
+
+  const resp = await fetch(url)
+    .then(res => res.json())
+    .catch(err => {
+      throw new Error(err)
+    })
+
+  if (checkValidBody({ body: resp, array: true })) return resp as IStock[]
+
+  throw new Error('Query did not return a valid body')
+}
+
+export { getStock, getStocks }
