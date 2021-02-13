@@ -1,4 +1,5 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
+import { Quote } from './types'
 
 const ats = (arr: string[]): string => {
   let str = ''
@@ -12,58 +13,54 @@ const ats = (arr: string[]): string => {
   return str
 }
 
-interface IStock {
-  symbol: string
-  sector: string
-  securityType: string
-  bidPrice: number
-  bidSize: number
-  askPrice: number
-  askSize: number
-  lastUpdated: number
-  lastSalePrice: number
-  lastSaleSize: number
-  lastSaleTime: number
-  volume: number
+const tokenString = (accessKey: string): string => {
+  const token = `token=${accessKey}`
+  return token
 }
 
-const checkValidBody = async ({ body, array }: { body: IStock[]; array: boolean }) => {
-  if (body.length === 1 && array === false) {
-    return true
-  }
-  if (body.length > 1 && array === true) {
-    return true
-  }
-  return false
-}
-
-const getStock = async ({ ticker, apiKey }: { ticker: string; apiKey: string }): Promise<IStock> => {
-  const url = `https://cloud.iexapis.com/stable/tops?token=${apiKey}&symbols=${ticker}`
-  if (typeof apiKey !== 'string') throw new Error('API keyas not defined')
-
-  const resp = await fetch(url)
-    .then(res => res.json())
+const getStock = async ({ ticker, apiKey }: { ticker: string; apiKey: string }): Promise<Quote> => {
+  const url = `https://cloud.iexapis.com/stable/stock/${ticker}/batch?types=quote&range=1m&${tokenString(apiKey)}`
+  if (typeof apiKey !== 'string') throw new Error('API key not defined')
+  console.log(url)
+  const stock = axios
+    .get(url)
+    .then(res => {
+      const { data } = res
+      const { quote } = data
+      return quote as Quote
+    })
     .catch(err => {
       throw new Error(err)
     })
-  if (checkValidBody({ body: resp, array: false })) return resp[0] as IStock
 
-  throw new Error('Query did not return a valid body')
+  return stock
 }
 
-const getStocks = async ({ tickers, apiKey }: { tickers: string[]; apiKey: string }): Promise<IStock[]> => {
+const getStocks = async ({
+  tickers,
+  apiKey
+}: {
+  tickers: string[]
+  apiKey: string
+}): Promise<Record<string, Quote>> => {
   const stocks = ats(tickers)
-  const url = `https://cloud.iexapis.com/stable/tops?token=${apiKey}&symbols=${stocks}`
+  const url = `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${stocks}&types=quote&range=1m&${tokenString(
+    apiKey
+  )}`
+  if (typeof apiKey !== 'string') throw new Error('API key is not defined')
 
-  const resp = await fetch(url)
-    .then(res => res.json())
+  const stock = axios
+    .get(url)
+    .then(res => {
+      const { data } = res
+
+      return data as Record<string, Quote>
+    })
     .catch(err => {
       throw new Error(err)
     })
 
-  if (checkValidBody({ body: resp, array: true })) return resp as IStock[]
-
-  throw new Error('Query did not return a valid body')
+  return stock
 }
 
 export { getStock, getStocks }

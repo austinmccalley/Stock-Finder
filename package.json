@@ -1,6 +1,6 @@
 {
   "name": "stockfinder",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Query IEX Cloud using an API key to get stock prices",
   "main": "built/src/index.js",
   "types": "built/src/index.d.ts",
@@ -9,7 +9,7 @@
     "prod": "tsc && node ./built/src/index.js",
     "lint": "eslint src/ --fix --ext .js,.jsx,.ts,.tsx",
     "debug": "tsc && node --inspect ./built/src/index.js",
-    "test": "snyk test && npx mocha",
+    "test": "npx mocha",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "preversion": "npm test",
@@ -36,16 +36,16 @@
     "url": "https://github.com/Mr-Que/Stock-Finder/issues"
   },
   "homepage": "https://github.com/Mr-Que/Stock-Finder#readme",
-  "dependencies": {
-    "node-fetch": "^2.6.0"
-  },
+  "dependencies": {},
   "snyk": true,
   "devDependencies": {
     "@types/node-fetch": "^2.5.6",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
+    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
@@ -55,6 +55,7 @@
     "husky": "^4.0.3",
     "lint-staged": "^10.5.3",
     "mocha": "^7.0.0",
+    "moment": "^2.29.1",
     "prettier": "^1.19.1",
     "snyk": "^1.305.1",
     "ts-node": "^8.6.2",
