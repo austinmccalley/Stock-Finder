@@ -42,7 +42,7 @@ const getStocks = async ({
 }: {
   tickers: string[]
   apiKey: string
-}): Promise<Record<string, Quote>> => {
+}): Promise<Record<string, { quote: Quote }>> => {
   const stocks = ats(tickers)
   const url = `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${stocks}&types=quote&range=1m&${tokenString(
     apiKey
@@ -54,7 +54,7 @@ const getStocks = async ({
     .then(res => {
       const { data } = res
 
-      return data as Record<string, Quote>
+      return data as Record<string, { quote: Quote }>
     })
     .catch(err => {
       throw new Error(err)
