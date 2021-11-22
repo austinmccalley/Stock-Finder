@@ -36,13 +36,14 @@
     "url": "https://github.com/Mr-Que/Stock-Finder/issues"
   },
   "homepage": "https://github.com/Mr-Que/Stock-Finder#readme",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
   "snyk": true,
   "devDependencies": {
     "@types/node-fetch": "^2.5.6",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
-    "axios": "^0.21.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "crypto": "^1.0.1",
